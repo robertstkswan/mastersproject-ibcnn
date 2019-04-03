@@ -1,22 +1,23 @@
 """Plot the networks in the information plane"""
 import matplotlib
-matplotlib.use("TkAgg")
-import numpy as np
-import _pickle as cPickle
-# import cPickle
-from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 from matplotlib.colors import ListedColormap, BoundaryNorm
+import matplotlib.animation as animation
+import numpy as np
+from numpy import linalg as LA
+from scipy.interpolate import interp1d
 import scipy.io as sio
 import scipy.stats as sis
-import os
-import matplotlib.animation as animation
-import math
-import os.path
 import idnns.plots.utils as utils
 import tkinter as tk
-from numpy import linalg as LA
+import math
+import _pickle as cPickle
+# import cPickle
+import os
+import os.path
+
+matplotlib.use("TkAgg")
 
 from tkinter import filedialog
 LAYERS_COLORS  = ['red', 'blue', 'green', 'yellow', 'pink', 'orange']
@@ -549,8 +550,8 @@ def plot_alphas(str_name, save_name='dist'):
     plt.show()
     return
     """
-    I_XT_array_var = np.squeeze(np.array(extract_array(params, 'IXT_vartional')))
-    I_TY_array_var = np.squeeze(np.array(extract_array(params, 'ITY_vartional')))
+    #I_XT_array_var = np.squeeze(np.array(extract_array(params, 'IXT_vartional')))
+    #I_TY_array_var = np.squeeze(np.array(extract_array(params, 'ITY_vartional')))
 
     I_TY_array = np.squeeze(np.array(extract_array(params, 'local_ITY')))
     """
@@ -575,7 +576,7 @@ def plot_alphas(str_name, save_name='dist'):
     for i in range(0,20):
         print (i, sigmas[i])
         f1, axes1 = plt.subplots(1, 1)
-        axes1.plot(I_XT_array, I_XT_array_var[:,:,i], linewidth=5)
+        #axes1.plot(I_XT_array, I_XT_array_var[:,:,i], linewidth=5)
         axes1.plot([0, 15.1], [0, 15.1], transform=axes1.transAxes)
         axes1.set_title('Sigmma=' +str(sigmas[i]))
         axes1.set_ylim([0,15.1])
@@ -589,7 +590,7 @@ def plot_alphas(str_name, save_name='dist'):
     linestyles  = [ '--', '-.', '-','', ' ',':', '']
     epochs_s =[0, -1]
     for j in epochs_s:
-        for i  in range(0, I_XT_array.shape[1]):
+        for i in range(0, I_XT_array.shape[1]):
 
             axes.plot(sigmas, I_XT_array_var[j,i,:],color = colors[i], linestyle = linestyles[j], label='Layer-'+str(i) +' Epoch - ' +str(epochs_s[j]))
     title_str = 'I(X;T) for different layers as function of $\sigma$ (The width of the gaussian)'
