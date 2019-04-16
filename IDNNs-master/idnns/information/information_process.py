@@ -1,6 +1,6 @@
 '''
 Calculate the information in the network
-Can be by the full distribution rule (for small netowrk) or bt diffrenet approximation method
+Can be by the full distribution rule (for small network) or by different approximation method
 '''
 import multiprocessing
 import warnings
@@ -9,10 +9,11 @@ import tensorflow as tf
 import idnns.information.information_utilities as inf_ut
 from idnns.networks import model as mo
 from idnns.information.mutual_info_estimation import calc_varitional_information
-warnings.filterwarnings("ignore")
-from joblib import Parallel, delayed
-NUM_CORES = multiprocessing.cpu_count()
 from idnns.information.mutual_information_calculation import *
+from joblib import Parallel, delayed
+
+warnings.filterwarnings("ignore")
+NUM_CORES = multiprocessing.cpu_count()
 
 
 def calc_information_for_layer(data, bins, unique_inverse_x, unique_inverse_y, pxs, pys1):
@@ -116,7 +117,7 @@ def calc_information_for_epoch(iter_index, interval_information_display, ws_iter
 			calc_varitional_information(ws_iter_index[i], label, model_path, i, len(ws_iter_index) - 1, iter_index,
 			                            input_size, layerSize, ss[i], pys, ks[i], search_sigma=False) for i in
 			range(len(ws_iter_index))]
-		# Full plug-in infomration
+		# Full plug-in information
 		params_original = np.array(
 			[calc_information_for_layer_with_other(data=ws_iter_index[i], bins=bins, unique_inverse_x=unique_inverse_x,
 			                                       unique_inverse_y=unique_inverse_y, label=label,
@@ -136,7 +137,7 @@ def calc_information_for_epoch(iter_index, interval_information_display, ws_iter
 			calc_varitional_information(ws_iter_index[i], label, model_path, i, len(ws_iter_index) - 1, iter_index,
 			                            input_size, layerSize, ss[i], pys, ks[i], search_sigma=True) for i in
 			range(len(ws_iter_index))]
-	# Calc infomration of only subset of the neurons
+	# Calc information of only subset of the neurons
 	elif calc_information_by_sampling:
 		parmas = calc_by_sampling_neurons(ws_iter_index=ws_iter_index, num_of_samples=num_of_samples, label=label,
 		                                  sigma=sigma, bins=bins, pxs=pxs)

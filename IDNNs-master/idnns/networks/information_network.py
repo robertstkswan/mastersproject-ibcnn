@@ -9,15 +9,15 @@ from idnns.information import information_process  as inn
 from idnns.plots import plot_figures as plt_fig
 from idnns.networks import network_paramters as netp
 from idnns.networks.utils import load_data
-
 # from idnns.network import utils
 # import idnns.plots.plot_gradients as plt_grads
+
+
 NUM_CORES = multiprocessing.cpu_count()
 
 
 class informationNetwork():
-	"""A class that store the network, train it and calc it's information (can be several of networks) """
-
+	"""A class that stores the network, train it and calc it's information (can be several of networks)"""
 	def __init__(self, rand_int=0, num_of_samples=None, args=None):
 		if args == None:
 			args = netp.get_default_parser(num_of_samples)
@@ -68,7 +68,7 @@ class informationNetwork():
 			'directory'], params['epochsInds'] = self.train_samples, NUM_CORES, self.name_to_save, self.epochs_indexes
 		self.params = params
 		self.rand_int = rand_int
-		# If we trained already the network
+		# If we already trained the network
 		self.traind_network = False
 
 	def save_data(self, parent_dir='jobs/', file_to_save='data.pickle'):
@@ -116,7 +116,7 @@ class informationNetwork():
 			           for i in range(len(self.train_samples)) for j in range(len(self.layers_sizes)) for k in
 			           range(self.num_of_repeats)]
 
-		# Extract all the measures and orgainze it
+		# Extract all the measures and organize it
 		for i in range(len(self.train_samples)):
 			for j in range(len(self.layers_sizes)):
 				for k in range(self.num_of_repeats):
@@ -148,7 +148,7 @@ class informationNetwork():
 				 for i in range(len(self.train_samples)) for j in
 				 range(len(self.layers_sizes)) for k in range(self.args.num_of_repeats)])
 		else:
-			print ('Cant calculate the infomration of the networks!!!')
+			print ('Cant calculate the information of the networks!!!')
 
 	def calc_information_last(self):
 		"""Calculate the information of the last epoch"""

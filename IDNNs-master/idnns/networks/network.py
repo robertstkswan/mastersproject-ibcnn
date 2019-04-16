@@ -15,7 +15,7 @@ NUM_CORES = multiprocessing.cpu_count()
 
 
 def build_model(activation_function, layerSize, input_size, num_of_classes, learning_rate_local, save_file, covn_net):
-	"""Bulid specipic model of the network
+	"""Bulid specific model of the network
 	Return the network model
 	"""
 	model = mo.Model(input_size, layerSize, num_of_classes, learning_rate_local, save_file, int(activation_function),
@@ -28,15 +28,15 @@ def train_and_calc_inf_network(i, j, k, layerSize, num_of_ephocs, learning_rate_
                                model_type, percent_of_train, interval_accuracy_display, calc_information,
                                calc_information_last, num_of_bins,
                                interval_information_display, save_ws, rand_int, cov_net):
-	"""Train the network and calculate it's information"""
+	"""Train the network and calculate its information"""
 	network_name = '{0}_{1}_{2}_{3}'.format(i, j, k, rand_int)
-	print ('Training network  - {0}'.format(network_name))
+	print('Training network  - {0}'.format(network_name))
 	network = train_network(layerSize, num_of_ephocs, learning_rate_local, batch_size, indexes, save_grads,
 	                        data_sets_org, model_type, percent_of_train, interval_accuracy_display, network_name,
 	                        cov_net)
 	network['information'] = []
 	if calc_information:
-		print ('Calculating the infomration')
+		print ('Calculating the information')
 		infomration = np.array([inn.get_information(network['ws'], data_sets_org.data, data_sets_org.labels,
 		                                            num_of_bins, interval_information_display, network['model'],
 		                                            layerSize)])
@@ -97,7 +97,7 @@ def print_accuracy(batch_points_test, data_sets, model, sess, j, acc_train_array
 def train_network(layerSize, num_of_ephocs, learning_rate_local, batch_size, indexes, save_grads,
                   data_sets_org, model_type, percent_of_train, interval_accuracy_display,
                   name, covn_net):
-	"""Train the nework"""
+	"""Train the network"""
 	tf.reset_default_graph()
 	data_sets = data_shuffle(data_sets_org, percent_of_train)
 	ws, estimted_label, gradients, infomration, models, weights = [[None] * len(indexes) for _ in range(6)]

@@ -11,6 +11,7 @@ import scipy.io as sio
 import scipy.stats as sis
 import idnns.plots.utils as utils
 import tkinter as tk
+from tkinter import filedialog
 import math
 import _pickle as cPickle
 # import cPickle
@@ -18,16 +19,15 @@ import os
 import os.path
 
 matplotlib.use("TkAgg")
-
-from tkinter import filedialog
 LAYERS_COLORS  = ['red', 'blue', 'green', 'yellow', 'pink', 'orange']
 
+
 def plot_all_epochs(gen_data, I_XT_array, I_TY_array, axes, epochsInds, f, index_i, index_j, size_ind,
-                    font_size, y_ticks, x_ticks, colorbar_axis, title_str, axis_font, bar_font, save_name, plot_error = True,index_to_emphasis=1000):
-    """Plot the infomration plane with the epochs in diffrnet colors """
-    #If we want to plot the train and test error
+                    font_size, y_ticks, x_ticks, colorbar_axis, title_str, axis_font, bar_font, save_name, plot_error=True,index_to_emphasis=1000):
+    """Plot the information plane with the epochs in different colors """
+    # If we want to plot the train and test error
     if plot_error:
-        fig_strs = ['train_error','test_error','loss_train','loss_test' ]
+        fig_strs = ['train_error','test_error','loss_train','loss_test']
         fig_data = [np.squeeze(gen_data[fig_str]) for fig_str in fig_strs]
         f1 = plt.figure(figsize=(12, 8))
         ax1 = f1.add_subplot(111)
@@ -473,7 +473,6 @@ def update_axes(axes, xlabel, ylabel, xlim, ylim, title, xscale, yscale, x_ticks
                      set_xscale=True, yscale=yscale, xscale=xscale, ytick_labels=labels, genreal_scaling=True)
 
 
-
 def extract_array(data, name):
     results = [[data[j,k][name] for k in range(data.shape[1])] for j in range(data.shape[0])]
     return results
@@ -538,11 +537,14 @@ def plot_hist(str_name, save_name='dist'):
     line_ani.save(save_name+'_movie.mp4',writer=writer,dpi=250)
     plt.show()
 
+
 def plot_alphas(str_name, save_name='dist'):
-    data_array = utils.get_data(str_name)
-    params = np.squeeze(np.array(data_array['information']))
-    I_XT_array = np.squeeze(np.array(extract_array(params, 'local_IXT')))
-    """"
+    data_array = utils.get_data(str_name)  # loads ONE pickle file
+    params = np.squeeze(np.array(data_array['information']))  # gets array of local IXT and IYT
+    I_XT_array = np.squeeze(np.array(extract_array(params, 'local_IXT')))  # gets array of local IXT
+    I_TY_array = np.squeeze(np.array(extract_array(params, 'local_ITY')))
+
+    """
     for i in range(I_XT_array.shape[2]):
         f1, axes1 = plt.subplots(1, 1)
 
@@ -550,10 +552,10 @@ def plot_alphas(str_name, save_name='dist'):
     plt.show()
     return
     """
+
     #I_XT_array_var = np.squeeze(np.array(extract_array(params, 'IXT_vartional')))
     #I_TY_array_var = np.squeeze(np.array(extract_array(params, 'ITY_vartional')))
 
-    I_TY_array = np.squeeze(np.array(extract_array(params, 'local_ITY')))
     """
     f1, axes1 = plt.subplots(1, 1)
     #axes1.plot(I_XT_array,I_TY_array)
@@ -570,11 +572,10 @@ def plot_alphas(str_name, save_name='dist'):
     plt.show()
     return
     """
-    #for i in range()
-    sigmas = np.linspace(0, 0.3, 20)
 
+    sigmas = np.linspace(0, 0.3, 20)
     for i in range(0,20):
-        print (i, sigmas[i])
+        print(i, sigmas[i])
         f1, axes1 = plt.subplots(1, 1)
         #axes1.plot(I_XT_array, I_XT_array_var[:,:,i], linewidth=5)
         axes1.plot([0, 15.1], [0, 15.1], transform=axes1.transAxes)
@@ -604,6 +605,8 @@ def plot_alphas(str_name, save_name='dist'):
                      set_xscale=False, yscale=None, xscale=None, ytick_labels='', genreal_scaling=False)
     axes.legend()
     plt.show()
+
+
 if __name__ == '__main__':
     #The action the you want to plot
     #Plot snapshots of all the networks

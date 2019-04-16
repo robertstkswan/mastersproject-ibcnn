@@ -1,0 +1,60 @@
+C:\Users\Student\Anaconda3\python.exe "C:/Users/Student/Documents/Robert Swan/IDNNs-master/main.py"
+*Building the network with the following params:* (Step 1/4)
+Loading Data...
+sampleLen 1
+nDistSmpls 1
+layerSizes 10,7,5,4,3
+nEpoch 8000
+batch 512
+nRepeats 1
+nEpochInds 274
+LastEpochsInds 7999
+DataName var_u
+lr 0.0004
+train_samples [80.]
+CPUs 4
+directory net_sampleLen=1_nDistSmpls=1_layerSizes=10,7,5,4,3_nEpoch=8000_batch=512_nRepeats=1_nEpochInds=274_LastEpochsInds=7999_DataName=var_u_lr=0.0004
+*Training and calculating the network information* (Step 2/4)
+Training network  - 0_0_0_0
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\python\ops\math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+2019-04-16 10:52:28.893523: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+2019-04-16 10:52:28.893523: I tensorflow/core/common_runtime/process_util.cc:71] Creating new thread pool with default inter op setting: 4. Tune using inter_op_parallelism_threads for best performance.
+Epoch 1 - Test Accuracy: 0.326 Train Accuracy: 0.482
+Epoch 500 - Test Accuracy: 0.878 Train Accuracy: 0.945
+Epoch 999 - Test Accuracy: 0.948 Train Accuracy: 0.988
+Epoch 1498 - Test Accuracy: 0.957 Train Accuracy: 0.998
+Epoch 1997 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 2496 - Test Accuracy: 0.963 Train Accuracy: 1.000
+Epoch 2995 - Test Accuracy: 0.963 Train Accuracy: 1.000
+Epoch 3494 - Test Accuracy: 0.963 Train Accuracy: 1.000
+Epoch 3993 - Test Accuracy: 0.964 Train Accuracy: 1.000
+Epoch 4492 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 4991 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 5490 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 5989 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 6488 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 6987 - Test Accuracy: 0.965 Train Accuracy: 1.000
+Epoch 7486 - Test Accuracy: 0.966 Train Accuracy: 1.000
+Epoch 7985 - Test Accuracy: 0.966 Train Accuracy: 1.000
+Calculating the information
+Start calculating the information...
+Calculated The information of epoch number - 0
+Calculated The information of epoch number - 30
+Calculated The information of epoch number - 60
+Calculated The information of epoch number - 90
+Calculated The information of epoch number - 120
+Calculated The information of epoch number - 150
+Calculated The information of epoch number - 180
+Calculated The information of epoch number - 210
+Calculated The information of epoch number - 240
+Calculated The information of epoch number - 270
+*Saving pickle to jobs directory* (Step 3/4)
+*Plotting figures* (Step 4/4)
+Time taken for main.py is 6004.414295196533
+
+Process finished with exit code 0

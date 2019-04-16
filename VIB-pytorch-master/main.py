@@ -22,13 +22,14 @@ def main(args):
     print(args)
     print()
 
-    net = Solver(args)
+    net = Solver(args)  # creates NN object
 
     if args.mode == 'train' : net.train()
     elif args.mode == 'test' : net.test(save_ckpt=False)
     else : return 0
 
-if __name__ == "__main__":
+
+if __name__ == "__main__":  # if run as main file ie 'python main.py' in terminal
 
     parser = argparse.ArgumentParser(description='TOY VIB')
     parser.add_argument('--epoch', default = 200, type=int, help='epoch size')
