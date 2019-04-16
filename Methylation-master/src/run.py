@@ -8,8 +8,6 @@ import pandas as pd
 import tensorflow as tf
 import time
 
-tf.logging.set_verbosity(tf.logging.ERROR)
-
 '''
 Used to either train a new model or test an exiting one (if you simply want to PREDICT methylation values, i.e. you're
 not interested in training a model - use predict.py).
@@ -74,6 +72,9 @@ model_name_suffix = 'test'
 if sample:
     learning_rates = [0.001, 0.0001, 0.00001, 0.000001, 0.0000001, 0.00000001]
 
+# Robert's edit
+learning_rates = [0.001]
+
 
 for counter in range(len(learning_rates)):
     print("starting new model with counter %d" %counter)
@@ -90,14 +91,18 @@ for counter in range(len(learning_rates)):
     conv_s = conv_strides[counter]
     connected_h = connected_hidden_units[counter]
 
+    # models are of size ~GB, too big for desktop RAM
     modelID = str(lr) + "_" + str(ff_h[0]) +"_"+str(conv_f)+"_"+str(conv_p)+"_"+str(connected_h)+"_"+str(random.randint(0,1000))\
               +"_"+str(optimizers[counter]).split(".")[-2]+"_"+str(losses[counter]).split(" ")[1]+model_name_suffix
     model = Model(sample, modelID,lr, multiplyNumUnitsBy, n_quant, neighborAlpha, c,
           ff_h[0], ff_h[1], conv_f, conv_p, conv_s, connected_h[0], connected_h[1], regularization_scale,
                  train, validation, test, validation_ch3_blind, test_ch3_blind, validation_e_blind, test_e_blind, n_genes,
                   ff_n_hidden, connected_n_hidden, optimizers[counter], losses[counter], load_model=load_model_ID, test_time=test_time, save_models=save_models, save_weights=test_time, is_prediction=False)
+    print("Building model")
     model.build(with_autoencoder=False)
+    print("Built model")
     tf.reset_default_graph()
+
 
 end = time.time()
 print("Time taken for main.py is " + str(end - start))

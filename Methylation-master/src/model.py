@@ -2,7 +2,6 @@ import os
 from helperMethods import *
 from scipy.stats import spearmanr
 import matplotlib
-
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -93,7 +92,7 @@ class Model():
         num_connected_layers = self.connected_num_hidden  # global_num_hidden
         connected_units = np.array([int(self.connected_h1 * (0.9 ** i)) for i in range(num_connected_layers)])
 
-        # TESNROFLOW GRAPH COMPONENTS
+        # TENSORFLOW GRAPH COMPONENTS
         # -----------------
         # -- INPUT --
         ff_trainable = True
