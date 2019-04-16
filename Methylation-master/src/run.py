@@ -2,8 +2,13 @@ import random
 from conf import Conf, ConfSample
 import dataset as Dataset
 from model import Model
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)  # must be before pandas import
 import pandas as pd
 import tensorflow as tf
+import time
+
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 '''
 Used to either train a new model or test an exiting one (if you simply want to PREDICT methylation values, i.e. you're
@@ -22,18 +27,20 @@ version, with no special characters.
 ####  YOUR SETTINGS - START ####
 
 # If you have already used run.py before, and wish to run on NEW data, make sure to remove the pkl files created under
-# the res folder (train/va/test probes and subjects)
+# the res folder (train/val/test probes and subjects)
 
 # NOTE - sample training is intended for a quick and low-memory / disk space demonstration only - it is not
 # sufficient to train a full model.
 
-load_model_ID = 0  # see explanation above
-test_time = False  # when you're ready for testing after using save_models below (our code handles the random splitting of the data into train/val/test)
-save_models = False  # if you want to save the model while training (saved upon validation improvement or > 90 minutes)
-sample = True  # will run on a mini dataset for demonstration purposes (see note above)
+load_model_ID = 3  # default=0, see explanation above
+test_time = False  # default=False, when you're ready for testing after using save_models below (our code handles the random splitting of the data into train/val/test)
+save_models = False  # defaul=False, if you want to save the model while training (saved upon validation improvement or > 90 minutes)
+sample = True  # default=True, will run on a mini dataset for demonstration purposes (see note above)
 
 ####  YOUR SETTINGS - END ####
 
+
+start = time.time()
 
 if sample:
     Conf = ConfSample
@@ -92,3 +99,5 @@ for counter in range(len(learning_rates)):
     model.build(with_autoencoder=False)
     tf.reset_default_graph()
 
+end = time.time()
+print("Time taken for main.py is " + str(end - start))

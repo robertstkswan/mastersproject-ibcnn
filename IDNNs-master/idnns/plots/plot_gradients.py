@@ -2,7 +2,7 @@
 import matplotlib
 matplotlib.use("TkAgg")
 import numpy as np
-import idnns.plots.utils as plt_ut
+import utils as plt_ut
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import filedialog
@@ -26,6 +26,8 @@ def plot_gradients(name_s=None, data_array=None, figures_dir=''):
         num_of_batchs = len(gradients[0])
         num_of_layers = len(gradients[0][0]) / 2
     else:
+        print(data_array['var_grad_val'])
+        print(np.squeeze(data_array['var_grad_val']))
         gradients = np.squeeze(data_array['var_grad_val'])[:, :, :]
         num_of_epochs,num_of_batchs,  num_of_layers = gradients.shape
         num_of_layers = int(num_of_layers / 2)
