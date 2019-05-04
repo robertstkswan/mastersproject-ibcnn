@@ -1,0 +1,6 @@
+directory is:
+C:\Users\Student\Documents\Robert_Swan\IDNNs-master\jobs\net_18-Apr-2019(14:04:5
+9.333635)_sampleLen=1_nDistSmpls=1_layerSizes=10,7,5,4,3_nEpoch=8000_batch=512_n
+Repeats=1_nEpochInds=274_LastEpochsInds=7999_DataName=var_u_lr=0.0004
+
+net_sampleLen=1_nDistSmpls=1_layerSizes=10,7,5,4,3_nEpoch=8000_batch=512_nRepeats=1_nEpochInds=274_LastEpochsInds=7999_DataName=var_u_lr=0.0004

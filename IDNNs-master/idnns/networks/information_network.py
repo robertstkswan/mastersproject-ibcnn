@@ -9,15 +9,16 @@ from idnns.information import information_process  as inn
 from idnns.plots import plot_figures as plt_fig
 from idnns.networks import network_paramters as netp
 from idnns.networks.utils import load_data
-# from idnns.network import utils
-# import idnns.plots.plot_gradients as plt_grads
+from idnns.networks import utils
+import idnns.plots.plot_gradients as plt_grads
+from datetime import datetime
 
 
 NUM_CORES = multiprocessing.cpu_count()
 
 
 class informationNetwork():
-	"""A class that stores the network, train it and calc it's information (can be several of networks)"""
+	"""A class that stores the network, train it and calc it's information (can be several networks)"""
 	def __init__(self, rand_int=0, num_of_samples=None, args=None):
 		if args == None:
 			args = netp.get_default_parser(num_of_samples)
@@ -63,7 +64,11 @@ class informationNetwork():
 		          'LastEpochsInds': self.epochs_indexes[-1], 'DataName': args.data_name,
 		          'lr': args.learning_rate}
 
-		self.name_to_save = args.name + "_" + "_".join([str(i) + '=' + str(params[i]) for i in params])
+		#adding time to file name
+		now = datetime.now()
+		now_string = now.strftime("%d-%b-%Y(%H.%M.%S.%f)")
+
+		self.name_to_save = args.name + "_" + now_string + "_" + "_".join([str(i) + '=' + str(params[i]) for i in params])
 		params['train_samples'], params['CPUs'], params[
 			'directory'], params['epochsInds'] = self.train_samples, NUM_CORES, self.name_to_save, self.epochs_indexes
 		self.params = params
@@ -71,9 +76,9 @@ class informationNetwork():
 		# If we already trained the network
 		self.traind_network = False
 
-	def save_data(self, parent_dir='jobs/', file_to_save='data.pickle'):
+	def save_data(self, parent_dir='jobs', file_to_save='data.pickle'):  # edited by Robert to work on all operating systems
 		"""Save the data to the file """
-		directory = '{0}/{1}{2}/'.format(os.getcwd(), parent_dir, self.params['directory'])
+		directory = os.path.join(os.path.sep, os.getcwd(), parent_dir, self.params['directory'])
 
 		data = {'information': self.information,
 		        'test_error': self.test_error, 'train_error': self.train_error, 'var_grad_val': self.grads,
@@ -81,6 +86,8 @@ class informationNetwork():
 			, 'l1_norms': self.l1_norms, 'weights': self.weights, 'ws': self.ws}
 
 		if not os.path.exists(directory):
+			print("directory is:")
+			print(directory)
 			os.makedirs(directory)
 		self.dir_saved = directory
 		with open(self.dir_saved + file_to_save, 'wb') as f:
@@ -126,7 +133,7 @@ class informationNetwork():
 					self.ws[k][j][i] = current_network['ws']
 					self.weights[k][j][i] = current_network['weights']
 					self.information[k][j][i] = current_network['information']
-					self.grads[k][i][i] = current_network['gradients']
+					self.grads[k][j][i] = current_network['gradients']  # Rob changed to [k][j][i] from [k][i][i]
 					self.test_error[k, j, i, :] = current_network['test_prediction']
 					self.train_error[k, j, i, :] = current_network['train_prediction']
 					self.loss_test[k, j, i, :] = current_network['loss_test']

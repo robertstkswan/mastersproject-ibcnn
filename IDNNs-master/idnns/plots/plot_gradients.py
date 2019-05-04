@@ -2,7 +2,7 @@
 import matplotlib
 matplotlib.use("TkAgg")
 import numpy as np
-import utils as plt_ut
+import idnns.plots.utils as plt_ut
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import filedialog
@@ -26,13 +26,18 @@ def plot_gradients(name_s=None, data_array=None, figures_dir=''):
         num_of_batchs = len(gradients[0])
         num_of_layers = len(gradients[0][0]) / 2
     else:
-        print(data_array['var_grad_val'])
-        print(np.squeeze(data_array['var_grad_val']))
         gradients = np.squeeze(data_array['var_grad_val'])[:, :, :]
         num_of_epochs,num_of_batchs,  num_of_layers = gradients.shape
         num_of_layers = int(num_of_layers / 2)
+
+    print("the shape of the var-grad-val is " , np.array(data_array['var_grad_val']).shape)
+    print("# of epochs is " + str(num_of_epochs))
+    print("# of batches is " + str(num_of_batchs))
+    print("# of layers is " + str(num_of_layers))
+    #print("gradients is", gradients)
+
     #The indxes where we sampled the network
-    print (np.squeeze(data_array['var_grad_val'])[0,0].shape)
+    #print (np.squeeze(data_array['var_grad_val'])[0,0].shape)
     epochsInds = (data_array['params']['epochsInds']).astype(np.int)
     #The norms of the layers
     #l2_norm = calc_weights_norms(data_array['ws_all'])
@@ -62,6 +67,7 @@ def plot_gradients(name_s=None, data_array=None, figures_dir=''):
             # Go over all the vectors of batchs (each vector is the size of # output weights, reduce the mean (over the batchs)
             # and calculate the covariance matrix
             for batch_index in range(num_of_batchs):
+                # CALCULATING COVARIANCE MATRIX
                 # This is in the size of the #output weights
                 current_vec = gradients_current_epoch_and_layer[batch_index, :] - average_vec
                 # The outer product of the current gradinet of the weights (in this specipic batch) with the transpose of it -
@@ -103,10 +109,16 @@ def plot_gradients(name_s=None, data_array=None, figures_dir=''):
         cov_traces_all.append(np.array(cov_traces))
         means_all.append(np.array(means))
         #The cov_traces and the means are vectors with the dimension of # epochs
-        #y_var = np.array(cov_traces)
-        #y_mean = np.array(means)
-        y_var = np.sum(cov_traces_all, axis=0)
-        y_mean = np.sum(means_all, axis=0)
+        y_var = np.array(cov_traces)  # uncommented by Robert
+        y_mean = np.array(means)  # uncommented by Robert
+        #y_var = np.sum(cov_traces_all, axis=0)  # commented out by Robert
+        #y_mean = np.sum(means_all, axis=0)  # commented out by Robert
+
+        # print("y_mean is", y_mean)
+        # print("y_var is", y_var)
+        print("y_mean shape is", y_mean.shape)
+        print("y_var shape is", y_var.shape)
+
         snr =  y_mean**2 / y_var
         #Plot the gradients and the means
         c_p1, = axes_log.plot(epochsInds[:], np.sqrt(y_var),markersize = 4, linewidth = 4,color = colors[layer], linestyle=':', markeredgewidth=0.2, dashes = [4,4])
@@ -118,6 +130,7 @@ def plot_gradients(name_s=None, data_array=None, figures_dir=''):
     plt_ut.adjust_axes(axes_log, axes_norms, p_0, p_1, f_log, f_norms, axes_snr, f_snr, p_3, axes_gaus, f_gaus, p_4,
                        directory_name=figures_dir)
     plt.show()
+    retun
 
 
 def calc_mean_var_loss(epochsInds,loss_train):
@@ -186,7 +199,7 @@ def flatted_graidnet(gradients, epoch_number, layer):
         gradients_list.append(current_list_inner)
     gradients_list = np.array(gradients_list)
     gradients_list =np.reshape(gradients_list, (gradients_list.shape[0], -1))
-
+    #print("gradients_list shape is", gradients_list.shape)
     return gradients_list
 
 
@@ -222,4 +235,5 @@ if __name__ == '__main__':
     root.withdraw()
     file_path = filedialog.askopenfilename()
     str_names = [[('/').join(file_path.split('/')[:-1]) + '/']]
+    print('str_names is ' + str_names[0][0] + ' and figures_dir is ' + directory)
     plot_gradients(str_names, figures_dir=directory)

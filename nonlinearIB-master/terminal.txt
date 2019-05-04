@@ -1,0 +1,89 @@
+(base) C:\Users\Student\Documents\Robert_Swan\nonlinearIB-master\code>python run
+.py --epoch_report_mi --backend tensorflow --batch_size 2 --nb_epoch 2
+Using TensorFlow backend.
+# ARGS: {'backend': 'tensorflow', 'mode': 'nlIB', 'log_dir': '../logs/', 'nb_epo
+ch': 2, 'beta': 0.0, 'init_kde_logvar': -5.0, 'init_noise_logvar': -6.0, 'trainN
+': None, 'testN': None, 'miN': 1000, 'batch_size': 2, 'optimizer': 'adam', 'init
+_lr': 0.001, 'lr_decaysteps': 10, 'lr_decay': 0.5, 'no_test_phase_noise': False,
+ 'encoder': '800-800-20', 'encoder_acts': 'relu-relu-relu', 'decoder': '', 'pred
+ict_samples': 1, 'epoch_report_mi': True, 'noise_logvar_nottrainable': False, 's
+ame_minibatch': False, 'gpu_id': '0', 'INPUT_DIM': 784}
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\
+python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.fr
+amework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+{'name': 'model_1', 'layers': [{'name': 'input_1', 'class_name': 'InputLayer', '
+config': {'batch_input_shape': (None, 784), 'dtype': 'float32', 'sparse': False,
+ 'name': 'input_1'}, 'inbound_nodes': []}, {'name': 'dense_1', 'class_name': 'De
+nse', 'config': {'name': 'dense_1', 'trainable': True, 'units': 800, 'activation
+': 'relu', 'use_bias': True, 'kernel_initializer': {'class_name': 'VarianceScali
+ng', 'config': {'scale': 2.0, 'mode': 'fan_in', 'distribution': 'uniform', 'seed
+': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_re
+gularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kerne
+l_constraint': None, 'bias_constraint': None}, 'inbound_nodes': [[['input_1', 0,
+ 0, {}]]]}, {'name': 'dense_2', 'class_name': 'Dense', 'config': {'name': 'dense
+_2', 'trainable': True, 'units': 800, 'activation': 'relu', 'use_bias': True, 'k
+ernel_initializer': {'class_name': 'VarianceScaling', 'config': {'scale': 2.0, '
+mode': 'fan_in', 'distribution': 'uniform', 'seed': None}}, 'bias_initializer':
+{'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regular
+izer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_cons
+traint': None}, 'inbound_nodes': [[['dense_1', 0, 0, {}]]]}, {'name': 'dense_3',
+ 'class_name': 'Dense', 'config': {'name': 'dense_3', 'trainable': True, 'units'
+: 20, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'class_name
+': 'VarianceScaling', 'config': {'scale': 2.0, 'mode': 'fan_in', 'distribution':
+ 'uniform', 'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config'
+: {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regulariz
+er': None, 'kernel_constraint': None, 'bias_constraint': None}, 'inbound_nodes':
+ [[['dense_2', 0, 0, {}]]]}, {'name': 'identity_map_1', 'class_name': 'IdentityM
+ap', 'config': {'name': 'identity_map_1', 'trainable': True}, 'inbound_nodes': [
+[['dense_3', 0, 0, {}]]]}, {'name': 'noise_layer_1', 'class_name': 'NoiseLayer',
+ 'config': {'name': 'noise_layer_1', 'trainable': True}, 'inbound_nodes': [[['id
+entity_map_1', 0, 0, {}]]]}, {'name': 'dense_4', 'class_name': 'Dense', 'config'
+: {'name': 'dense_4', 'trainable': True, 'units': 10, 'activation': 'softmax', '
+use_bias': True, 'kernel_initializer': {'class_name': 'VarianceScaling', 'config
+': {'scale': 1.0, 'mode': 'fan_avg', 'distribution': 'uniform', 'seed': None}},
+'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer':
+ None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constrain
+t': None, 'bias_constraint': None}, 'inbound_nodes': [[['noise_layer_1', 0, 0, {
+}]]]}], 'input_layers': [['input_1', 0, 0]], 'output_layers': [['dense_4', 0, 0]
+]}
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\
+python\ops\math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is d
+eprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\
+python\ops\math_grad.py:102: div (from tensorflow.python.ops.math_ops) is deprec
+ated and will be removed in a future version.
+Instructions for updating:
+Deprecated in favor of operator or tf.math.divide.
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/2
+Learning rate: 0.0010000
+ - 5833s - loss: 2.3032 - acc: 0.1088 - val_loss: 2.3015 - val_acc: 0.1139
+noiseLV=-7.4414916
+kdeLV=-6.175777
+mi_trn=15.141624450683594
+mi_tst=15.141624450683594
+
+Epoch 2/2
+C:\Users\Student\Anaconda3\lib\site-packages\scipy\optimize\linesearch.py:425: R
+untimeWarning: invalid value encountered in greater
+  if (phi_a1 > phi0 + c1 * alpha1 * derphi0) or \
+C:\Users\Student\Anaconda3\lib\site-packages\scipy\optimize\optimize.py:1010: Ru
+ntimeWarning: invalid value encountered in less_equal
+  if (gnorm <= gtol):
+Learning rate: 0.0010000
+ - 4747s - loss: 2.3020 - acc: 0.1112 - val_loss: 2.3017 - val_acc: 0.1103
+noiseLV=-8.342679
+kdeLV=-1040.4158
+mi_trn=6.866455078125e-05
+mi_tst=6.866455078125e-05
+
+Traceback (most recent call last):
+  File "run.py", line 122, in <module>
+    for key, value_list in hist.iteritems():
+AttributeError: 'dict' object has no attribute 'iteritems'
+
+(base) C:\Users\Student\Documents\Robert_Swan\nonlinearIB-master\code>

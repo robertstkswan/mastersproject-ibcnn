@@ -47,7 +47,7 @@ def train_and_calc_inf_network(i, j, k, layerSize, num_of_ephocs, learning_rate_
 		                                            num_of_bins, interval_information_display,
 		                                            network['model'], layerSize)])
 		network['information'] = infomration
-	# If we dont want to save layer's output
+	# If we don't want to save layer's output
 	if not save_ws:
 		network['weights'] = 0
 	return network
@@ -168,4 +168,5 @@ def train_network(layerSize, num_of_ephocs, learning_rate_local, batch_size, ind
 	network['loss_train'] = loss_func_train
 	network['gradients'] = gradients
 	network['model'] = model
+	network['weights'] = weights  # added by Robert
 	return network

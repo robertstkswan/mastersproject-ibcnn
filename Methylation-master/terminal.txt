@@ -1,0 +1,73 @@
+(base) C:\Users\Student\Documents\Robert_Swan\Methylation-master\src>python run.
+py
+reading data
+starting new model with counter 0
+Building model
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-su
+nset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+WARNING:tensorflow:From C:\Users\Student\Documents\Robert_Swan\Methylation-maste
+r\src\model.py:125: dense (from tensorflow.python.layers.core) is deprecated and
+ will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\
+python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.fr
+amework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From C:\Users\Student\Documents\Robert_Swan\Methylation-maste
+r\src\model.py:136: batch_normalization (from tensorflow.python.layers.normaliza
+tion) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.batch_normalization instead.
+WARNING:tensorflow:From C:\Users\Student\Documents\Robert_Swan\Methylation-maste
+r\src\model.py:282: conv2d (from tensorflow.python.layers.convolutional) is depr
+ecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d instead.
+WARNING:tensorflow:From C:\Users\Student\Documents\Robert_Swan\Methylation-maste
+r\src\model.py:288: average_pooling2d (from tensorflow.python.layers.pooling) is
+ deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.average_pooling2d instead.
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\
+python\ops\losses\losses_impl.py:277: to_float (from tensorflow.python.ops.math_
+ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From C:\Users\Student\Anaconda3\lib\site-packages\tensorflow\
+python\training\saver.py:1266: checkpoint_exists (from tensorflow.python.trainin
+g.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+2019-04-17 11:28:32.000073: W tensorflow/core/framework/allocator.cc:124] Alloca
+tion of 215880016 exceeds 10% of system memory.
+2019-04-17 11:28:32.000073: W tensorflow/core/framework/allocator.cc:124] Alloca
+tion of 215880016 exceeds 10% of system memory.
+2019-04-17 11:28:32.000073: W tensorflow/core/framework/allocator.cc:124] Alloca
+tion of 215880016 exceeds 10% of system memory.
+2019-04-17 11:28:32.000073: W tensorflow/core/framework/allocator.cc:124] Alloca
+tion of 215880016 exceeds 10% of system memory.
+2019-04-17 11:28:32.000073: W tensorflow/core/framework/allocator.cc:124] Alloca
+tion of 215880016 exceeds 10% of system memory.
+Model restored.
+Epoch 0
+VAL___________ corr:  -0.12967032967032965 loss 0.34379148
+CH3___________ corr:  0.3758241758241759 loss 0.3181705
+E___________ corr:  -0.07252747252747253 loss 0.4511005
+Epoch: 1/2...
+Epoch 1
+VAL___________ corr:  -0.0945054945054945 loss 0.34319848
+CH3___________ corr:  0.3054945054945055 loss 0.33865932
+E___________ corr:  0.13406593406593406 loss 0.27465838
+Epoch: 2/2...
+Built model
+Time taken for main.py is 1410.9911289215088
+
+(base) C:\Users\Student\Documents\Robert_Swan\Methylation-master\src>

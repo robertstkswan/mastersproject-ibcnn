@@ -11,15 +11,15 @@ import time
 '''
 Used to either train a new model or test an exiting one (if you simply want to PREDICT methylation values, i.e. you're
 not interested in training a model - use predict.py).
-You have two options: 
-(1) Train the model from scratch using load_model = 0 or 
-(2) Train with an existing model (transfer learning) using load_model = 1/2/3 according to your needs (if your CpG 
+You have two options:
+(1) Train the model from scratch using load_model = 0 or
+(2) Train with an existing model (transfer learning) using load_model = 1/2/3 according to your needs (if your CpG
 is within a 2K of one of the genes in the run_example file, choose 1, if within 10K choose 2 etc. according to paper. If
-you're not sure - either contact us (alonal at cs.technion.ac.il) or simply use the most general model - 3). 
+you're not sure - either contact us (alonal at cs.technion.ac.il) or simply use the most general model - 3).
 The pre-trained weights can be download them from the link provided in the README file.
 Note - the model's naming convention for checkpoint purposes is long (deliberately so that you know which parameters it includes). However,
 TensorFlow doesn't recognize long names when loading them, so before loading yours, make sure to rename them to a shorter
-version, with no special characters. 
+version, with no special characters.
 '''
 
 ####  YOUR SETTINGS - START ####
@@ -100,9 +100,9 @@ for counter in range(len(learning_rates)):
                   ff_n_hidden, connected_n_hidden, optimizers[counter], losses[counter], load_model=load_model_ID, test_time=test_time, save_models=save_models, save_weights=test_time, is_prediction=False)
     print("Building model")
     model.build(with_autoencoder=False)
-    print("Built model")
+    print("Built model. run.py finished.")
     tf.reset_default_graph()
 
 
 end = time.time()
-print("Time taken for main.py is " + str(end - start))
+print("Time taken for run.py is " + str(end - start))

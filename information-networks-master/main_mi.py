@@ -27,6 +27,8 @@ def main():
         ips = [InformationProcessorDeltaApprox(calc) for calc in calculators]
         processor = InformationProcessorUnion(ips)
 
+    print ("building model")
+
     model = get_model_categorical(
         input_shape=x_train[0].shape,
         network_shape=args.shape,
@@ -37,12 +39,17 @@ def main():
     batch_size = min(args.batch_size, len(x_train)) if args.batch_size > 0 else len(x_train)
     no_of_batches = math.ceil(len(x_train) / batch_size) * args.epochs
     information_callback = CalculateInformationCallback(model, processor, x_full)
+
+    print("calling model.fit")
+
     model.fit(x_train, y_train,
               batch_size=batch_size,
               callbacks=[information_callback, ProgressBarCallback(no_of_batches)],
               epochs=args.epochs,
               validation_data=(x_test, y_test),
-              verbose=0)
+              verbose=2)
+
+    print("finished calling model.fit")
 
     append = ",b-" + str(information_callback.batch)
     print("Saving data to files")

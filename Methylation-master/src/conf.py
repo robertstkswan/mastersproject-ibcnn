@@ -61,5 +61,5 @@ class ConfSample(Conf):
 
     numSampleInputCpgs = 4
 
-    epochs = 50
+    epochs = 2  # default=50
     batch_size = 7
