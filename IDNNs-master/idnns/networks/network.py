@@ -103,7 +103,9 @@ def train_network(layerSize, num_of_ephocs, learning_rate_local, batch_size, ind
 	ws, estimted_label, gradients, infomration, models, weights = [[None] * len(indexes) for _ in range(6)]
 	loss_func_test, loss_func_train, test_prediction, train_prediction = [np.zeros((len(indexes))) for _ in range(4)]
 	input_size = data_sets_org.data.shape[1]
+	print("input size is", input_size)
 	num_of_classes = data_sets_org.labels.shape[1]
+	print("number of classes is", num_of_classes)
 	batch_size = np.min([batch_size, data_sets.train.data.shape[0]])
 	batch_points = np.rint(np.arange(0, data_sets.train.data.shape[0] + 1, batch_size)).astype(dtype=np.int32)
 	batch_points_test = np.rint(np.arange(0, data_sets.test.data.shape[0] + 1, batch_size)).astype(dtype=np.int32)
